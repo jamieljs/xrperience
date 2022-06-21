@@ -4,8 +4,11 @@
 // is loaded, and before body.html is loaded.
 
 import './main.css'
-import {LRbuttonComponent} from './logic'
-AFRAME.registerComponent('LR-target', LRbuttonComponent) 
+import {ButtonComponent} from './logic'
+AFRAME.registerComponent('button-target', ButtonComponent) 
 
 import {splashImageComponent} from './splash-image'
 AFRAME.registerComponent('splash-image', splashImageComponent)
+
+import {Manager} from './manager'
+AFRAME.registerSystem('manager', Manager)

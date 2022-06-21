@@ -1,108 +1,82 @@
-const LRbuttonComponent = {
+const ButtonComponent = {
   multiple: true,
   init() {
     const scene = this.el.scenceEl
-    const leftbtn = scene.querySelector('#leftbtn')
-    const rightbtn = scene.querySelector('#rightbtn')
-    const target = scene.querySelector('#target')
-    const images = ['idx']
-    const {object3D} = this.el
-    object3D.visible = false
-    const showImage = ({detail}) => {
-      if (name !== detail.name) {
-        return
-      }
- 
-      object3D.position.copy(detail.position)
-      object3D.quaternion.copy(detail.rotation)
-      object3D.scale.set(detail.scale, detail.scale, detail.scale)
-      object3D.visible = true
+    const leftbtn = document.querySelector('#left-arrow')
+    const rightbtn = document.querySelector('#right-arrow')
+    const plusbtn = document.querySelector('#plus-btn')
+    const minusbtn = document.querySelector('#minus-btn')
+    const manager = document.querySelector('a-scene').systems['manager']
+    const model = document.querySelector('#model')
+    const store1btn = document.querySelector('#store1-btn')
+    const store2btn = document.querySelector('#store2-btn')
+    leftbtn.setAttribute('visible',false)
+    rightbtn.setAttribute('visible',false)
+    plusbtn.setAttribute('visible',false)
+    minusbtn.setAttribute('visible',false)
+    model.setAttribute('visible',false)
+    const changeModel = () => {
+      model.removeAttribute('gltf-model')
+      model.setAttribute('gltf-model', `#dish-${manager.idx + 1}-glb`)
     }
     const leftBtnclick = (e) => {
-      if (!leftbtn.visible) {
-        return
+      if(leftbtn.getAttribute('visible')==false){
+        return;
       }
-      if (!leftbtn.hasAttribute('time')) {
-        let time = 0
-        let idx = 0
-        if (rightbtn.hasAttribute('time')) {
-          time = rightbtn.getAttribute(`time${1}`)
-          idx = rightbtn.getAttribute('idx')
-        }
-        leftbtn.setAttribute('time', time)
-        idx--
-        leftbtn.setAttribute('idx', idx)
-        return
-      }  
-      const time = Math.max(leftbtn.getAttribute('time'), rightbtn.getAttribute('time')) + 1
-      let idx = 0
-      if (leftbtn.getAttribute('time') > rightbtn.getAttribute('time')) idx = leftbtn.getAttribute('idx')
-      else idx = rightbtn.getAttribute('idx')
-      idx--
-      if (idx === 0) {
-        leftbtn.visible = false
-      }
-      rightbtn.visible = true
-      leftbtn.setAttribute('time', time)
-      leftbtn.setAttribute('idx', idx)
-      // set to the idx'th image
+      manager.incre(-1)
+      changeModel()
+      console.log('leftbtn')
+      console.log(manager.idx)
     }
     const rightBtnclick = (e) => {
-      if (!rightbtn.visible) {
-        return
+      if(rightbtn.getAttribute('visible')==false){
+        return;
       }
-      if (!rightbtn.hasAttribute('time')) {
-        let time = 0
-        let idx = 0
-        if (leftbtn.hasAttribute('time')) {
-          time = leftbtn.getAttribute(`time${1}`)
-          idx = leftbtn.getAttribute('idx')
-        }
-        rightbtn.setAttribute('time', time)
-        idx++
-        rightbtn.setAttribute('idx', idx)
-        return
-      }
-      const time = Math.max(leftbtn.getAttribute('time'), rightbtn.getAttribute('time')) + 1
-      let idx = 0
-      if (leftbtn.getAttribute('time') > rightbtn.getAttribute('time')) idx = leftbtn.getAttribute('idx')
-      else idx = rightbtn.getAttribute('idx')
-      idx++
-      leftbtn.visible = true
-      if (idx === images.length - 1) {
-        rightbtn.visible = false
-      }
-      rightbtn.setAttribute('time', time)
-      rightbleftbtnibute('idx', idx)
-      // set to the idx'th image
+      manager.incre(1)
+      changeModel()
+      console.log('rightbtn')
+      console.log(manager.idx)
     }
-    switch (this.el.id) {
-      case 'leftbtn':
-        leftbtn.addEventListener('click', leftBtnclick)
-        break
-
-      case 'rightbtn':
-        rightbtn.addEventListener('click', rightBtnclick)
-        break
-      default:
-const nutributtonComponent{
-    multiple: true
-    init(){
-        const scene=this.el.sceneEl
-        const nutribtn=scene.querySelector('#nutribtn')
-        const platform=scene.querySelector('#platform')
-        const target=scene.querySelector('#target')
-        switch (this) {
-            case value:
-                
-                break;
-        
-            default:
-                break;
-        }
+    const plusBtnclick = (e) =>{
+      if(plusbtn.getAttribute('visible')==false){
+        return;
+      }
+      manager.add()
     }
-}    }
-  }
+    const minusBtnclick = (e) =>{
+      if(minusbtn.getAttribute('visible')==false){
+        return;
+      }
+      manager.remove()
+    }
+    const st1Btnclick = (e) => {
+      if(store1btn.getAttribute('visible')==false){
+        return;
+      }
+      store1btn.setAttribute('visible',false)
+      leftbtn.setAttribute('visible',true)
+      rightbtn.setAttribute('visible',true)
+      plusbtn.setAttribute('visible',true)
+      minusbtn.setAttribute('visible',true)
+    }
+    const st2Btnclick = (e) => {
+      if(store2btn.getAttribute('visible')==false){
+        return;
+      }
+      store2btn.setAttribute('visible',false)
+      leftbtn.setAttribute('visible',true)
+      rightbtn.setAttribute('visible',true)
+      plusbtn.setAttribute('visible',true)
+      minusbtn.setAttribute('visible',true)
+    }
+    store1btn.addEventListener('click',st1Btnclick)
+    store2btn.addEventListener('click',st2Btnclick)
+    leftbtn.addEventListener('click', leftBtnclick)
+    rightbtn.addEventListener('click', rightBtnclick)
+    plusbtn.addEventListener('click',plusBtnclick)
+    minusbtn.addEventListener('click',minusBtnclick)
+    console.log('HI')
+  },
 }
-
-export {LRbuttonComponent}
+export {ButtonComponent}
+export {ButtonComponent}
