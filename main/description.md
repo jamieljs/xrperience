@@ -11,7 +11,7 @@ objects:
 
 landing page
 [v] shop buttons
-[ ] text panel for instructions
+[v] text panel for instructions
     - Welcome to Happyfaces Hawker Centre!
     - Step 1: Click on the stall you would like to order from.
     - Step 2: Click the left/right buttons to browse the menu and view information about the dishes. Use the +/- buttons to add dishes to your cart.

@@ -1,0 +1,103 @@
+body::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index:-1;
+    content: url(./assets/info_background.png) url(./assets/ui_btn_reset_default.png) url(./assets/ui_btn_reset_pressed.png);
+  }
+  
+  .overlay {
+    /* To create the overlay   */
+    position: absolute;
+    z-index: 10;
+    /* To center all elements inside the overlay  */
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background-image: url(./assets/info_background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px 10px 50px 10px;
+    /* Change to bottom */
+    bottom: 0;
+  }
+  /* iPad 1, 2, Mini and Air */
+  @media only screen 
+    and (min-device-width: 768px) 
+    and (max-device-width: 1024px) 
+    and (-webkit-min-device-pixel-ratio: 1) {
+    .overlay {
+      padding: 85px 16px 50px 10px;
+    }
+  }
+  
+  /* iPad 3, 4 and Pro 9.7" */
+  @media only screen 
+    and (min-device-width: 768px) 
+    and (max-device-width: 1024px) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+    .overlay {
+      padding: 85px 16px 50px 10px;
+    }
+  }
+  .instructions {
+    color: black;
+    padding-top: 45px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: none;
+  }
+  .float {
+    position: fixed;
+    z-index: 15;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #000000A6;
+    color: #ffffff;
+    border-radius: 50px;
+    text-align: center;
+  }
+  .my-float {
+    margin-top: 22px;
+  }
+  .float-text {
+    font-size: small;
+    position: fixed;
+    z-index: 15;
+    bottom: 10px;
+    right: 18px;
+    color: #ffffff;
+    text-align: center;
+  }
+  .float-top {
+    top: 40px;
+    bottom: inherit;
+  }
+  .float-text-top {
+    top: 10px;
+    bottom: inherit;
+  }
+  h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 13px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  
+  .custom-refresh {
+    background-image: url(./assets/ui_btn_reset_default.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  .custom-refresh:focus {
+    background-image: url(./assets/ui_btn_reset_pressed.png);
+  }

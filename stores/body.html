@@ -1,0 +1,79 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+
+<div id="splashimage">
+    <!--<div class="instructions" id="instructions">-->
+        <h1>Welcome to Happyfaces Hawker Centre!</h1>
+        <p>
+            Step 1: Click on the stall you would like to order from.
+            <br>
+            Step 2: Click the left/right buttons to browse the menu and view information about the dishes. Use the +/- buttons to add dishes to your cart.
+            <br>
+            Step 3: When you are done ordering, click the "Finish Ordering" button.
+        </p>
+    <!--</div>-->
+    <!--<div class="order-instructions" id="order-instructions">-->
+        <h1>Confirm your order</h1>
+        <p>
+            Ensure that the virtual dishes that have appeared on the table are correct, then click "Confirm Order".
+            <br>
+            Note: your table number is 218. Please approach the stall if this is incorrect.
+        </p>
+    <!--</div>-->
+    <div id="start" style="display: none;">
+      <h2>Start AR</h2>
+    </div>
+  </div>
+  
+  <div class="float-text" id="reset-text">
+    Reset Order
+  </div>
+  <a href="#" class="float custom-refresh" id="reset-btn"
+    onclick="if (window.confirm('Are you sure you want to reset your order? All the dishes in your cart now will be lost.')) { window.location.reload(); }"></a>
+    
+  
+  <a-scene 
+  splash-image
+  xrextras-tap-recenter
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector>
+  
+    <a-assets>
+      <img id="store1-btn" src="assets/store1.png">
+      <img id="store2-btn" src="assets/store2.png">
+  
+      <img id="align-img" src="assets/align.jpg">
+      <img id="sprite-tap-img" src="assets/Tap_Sprite_V1.png">
+    </a-assets>
+  
+    <a-camera position="0 2 2"></a-camera>
+  
+    <a-light type="ambient" intensity="0.5"></a-light>
+  
+    <a-image
+      src="#store1-btn"
+      width="1"
+      height="1"
+      position="0 1.5 0">
+    </a-image>
+  
+    <a-image
+      src="#store2-btn"
+      width="1"
+      height="1"
+      position="0 0 0">
+    </a-image>
+    
+    <a-plane 
+      height="2000" 
+      width="2000" 
+      rotation="-90 0 0" 
+      material="shader: shadow; opacity: 0.67" 
+    shadow>
+    </a-plane>
+    
+  </a-scene>
+  

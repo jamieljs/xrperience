@@ -3,4 +3,11 @@
 // app.js is the main entry point for your 8th Wall app. Code here will execute after head.html
 // is loaded, and before body.html is loaded.
 
+// hm
+// hello james
+// hi jamie
+
 import './main.css'
+import './index.css'
+import {splashImageComponent} from './splash-image'
+AFRAME.registerComponent('splash-image', splashImageComponent)

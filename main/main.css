@@ -4,7 +4,7 @@ body::after {
     height: 0;
     overflow: hidden;
     z-index:-1;
-    content: url(./assets/info_background.png);
+    content: url(./assets/info_background.png) url(./assets/ui_btn_reset_default.png) url(./assets/ui_btn_reset_pressed.png);
  }
  
  .overlay {
@@ -92,3 +92,12 @@ body::after {
    padding-left: 2px;
    padding-right: 2px;
  }
+  
+ .custom-refresh {
+  background-image: url(./assets/ui_btn_reset_default.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.custom-refresh:focus {
+  background-image: url(./assets/ui_btn_reset_pressed.png);
+}
