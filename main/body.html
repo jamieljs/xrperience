@@ -1,172 +1,289 @@
 <!-- Copyright (c) 2022 8th Wall, Inc. -->
 <!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
 
-<div class="overlay" id="overlay">
-  <div class="instructions" id="instructions">
-      <h1>Welcome to Happyfaces Hawker Centre!</h1>
-      <p>
-          Step 1: Click on the stall you would like to order from.
-          <br>
-          Step 2: Click the left/right buttons to browse the menu and view information about the dishes. Use the +/- buttons to add dishes to your cart.
-          <br>
-          Step 3: When you are done ordering, click the "Finish Ordering" button.
-      </p>
+
+<div id="splashimage">
+  <div style="text-align:center; color:white; padding:25px; border:15px; background:rgb(0,0,0,0.8);">
+<h1>Welcome to Happyfaces Hawker Centre!</h1>
+    <p>
+        Step 1: Click on the stall you would like to order from.
+        <br>
+        Step 2: Click the left/right buttons to browse the menu and view information about the dishes. Use the +/- buttons to add dishes to your cart.
+        <br>
+        Step 3: When you are done ordering, click the "Finish Ordering" button.
+        <br>
+        Step 4: Ensure that the virtual dishes that have appeared on the table are correct, then click "Confirm Order".
+        <br>
+        Step 5: When your food is ready, you will get a notification to go and collect your food.
+        <br>
+        Note: your table number is 218. Please approach the stall if this is incorrect.
+    </p>
   </div>
-  <div class="order-instructions" id="order-instructions">
-      <h1>Confirm your order</h1>
-      <p>
-          Ensure that the virtual dishes that have appeared on the table are correct, then click "Confirm Order".
-          <br>
-          Note: your table number is 218. Please approach the stall if this is incorrect.
-      </p>
+  <div id="start" style="display: none;">
+    <h2>Start AR</h2>
   </div>
 </div>
 
-<div class="float-text" id="reset-text">
-Reset Order
+<div class="float-text" id="reset-text" style="display: none; text-shadow: 0 0 3px #000000">
+  Reset Order
 </div>
-<a href="#" class="float custom-refresh" id="reset-btn"
-onclick="if (window.confirm('Are you sure you want to reset your order? All the dishes in your cart now will be lost.')) { window.location.reload(); }"></a>
+<a href="#" class="float custom-refresh" id="reset-btn" style="display: none"
+  onclick="if (window.confirm('Are you sure you want to reset your order? All the dishes in your cart now will be lost.')) { window.location.reload(); }"></a>
 
-<a-scene 
+<a href="#" class="float" id="finish-btn" style="display: none"></a>
+<a href="#" class="float" id="send-order-btn" style="display: none"></a>
+
+
+<a-scene
 button-target
 manager
+splash-image
 xrextras-tap-recenter
 landing-page
 xrextras-loading
 xrextras-runtime-error
-xrextras-gesture-detector
-xrweb>
+xrextras-gesture-detector>
 
-<a-assets>
-    <!--shop buttons-->
-    <!--<a-asset-item id="stall-a-btn-glb" src="assets/stall-a-btn.glb"></a-asset-item>-->
-    <!--<a-asset-item id="stall-b-btn-glb" src="assets/stall-b-btn.glb"></a-asset-item>-->
+  <a-assets>
+      <!--shop buttons-->
+      <a-asset-item id="store1-glb" src="assets/store1.glb"></a-asset-item>
+      <a-asset-item id="store2-glb" src="assets/store2.glb"></a-asset-item>
 
-    <!--buttons-->
-    <a-asset-item id="arrow-btn-glb" src="assets/arrow-btn.glb"></a-asset-item>
-    <a-asset-item id="plus-btn-glb" src="assets/plus-btn.glb"></a-asset-item>
-    <a-asset-item id="minus-btn-glb" src="assets/minus-btn.glb"></a-asset-item>
-    <a-asset-item id="nutrition-info-glb" src="assets/nutrition-info.glb"></a-asset-item>
-    <a-asset-item id="ingredients-glb" src="assets/plus-btn.glb"></a-asset-item>
-    <!--<a-asset-item id="finish-order-btn-glb" src="assets/finish-order-btn.glb"></a-asset-item>-->
-    <!--<a-asset-item id="menu-back-btn-glb" src="assets/back-btn.glb"></a-asset-item>-->
-    <!--<a-asset-item id="confirm-order-btn-glb" src="assets/confirm-order-btn.glb"></a-asset-item>-->
-    <!--<a-asset-item id="order-back-btn-glb" src="assets/back-btn.glb"></a-asset-item>  -->
-    
-    <!--actual dishes-->
-    <a-asset-item id="plate-glb" src="assets/plate.glb"></a-asset-item>
-    <a-asset-item class="dish-1" id="dish-1-glb" src="assets/dish1.glb"></a-asset-item>
-    <a-asset-item class="dish-2" id="dish-2-glb" src="assets/dish1.glb"></a-asset-item>
-    <a-asset-item class="dish-3" id="dish-3-glb" src="assets/dish1.glb"></a-asset-item>
-    <!--<a-asset-item class="dish-2" id="dish-2-glb" src="assets/plate.glb"></a-asset-item>-->
-    <!--<a-asset-item class="dish-3" id="dish-3-glb" src="assets/plate.glb"></a-asset-item>-->
-  </a-assets>
+      <!--buttons-->
+      <a-asset-item id="arrow-btn-glb" src="assets/arrow-btn.glb"></a-asset-item>
+      <a-asset-item id="plus-btn-glb" src="assets/plus-btn.glb"></a-asset-item>
+      <a-asset-item id="minus-btn-glb" src="assets/minus-btn.glb"></a-asset-item>
+      <a-asset-item id="nutrition-info-glb" src="assets/nutrition-info.glb"></a-asset-item>
+      <a-asset-item id="ingredients-glb" src="assets/plus-btn.glb"></a-asset-item>
+      <!--<a-asset-item id="finish-order-btn-glb" src="assets/finish-order-btn.glb"></a-asset-item>-->
+      <!--<a-asset-item id="menu-back-btn-glb" src="assets/back-btn.glb"></a-asset-item>-->
+      <!--<a-asset-item id="confirm-order-btn-glb" src="assets/confirm-order-btn.glb"></a-asset-item>-->
+      <!--<a-asset-item id="order-back-btn-glb" src="assets/back-btn.glb"></a-asset-item>  -->
+      
+      <!--actual dishes-->
+      <a-asset-item id="plate-glb" src="assets/plate.glb"></a-asset-item>
+      <a-asset-item class="dish-1" id="dish-1-glb" src="assets/dish1.glb"></a-asset-item>
+      <a-asset-item class="dish-2" id="dish-2-glb" src="assets/dish2.glb"></a-asset-item>
+      <a-asset-item class="dish-3" id="dish-3-glb" src="assets/dish3.glb"></a-asset-item>
+    </a-assets>
 
-<a-entity
-light="
-    type: directional;
-    intensity: 0.8;
-    castShadow: true;
-    shadowMapHeight:2048;
-    shadowMapWidth:2048;
-    shadowCameraTop: 10;
-    target: #model;
-    shadowRadius: 12"
-xrextras-attach="target: model; offset: 1 15 3;"
-shadow>
-</a-entity>
-
-<a-camera 
-id="camera"
-position="0 2 2"
-raycaster="objects: .cantap"
-cursor="
-fuse: false;
-rayOrigin: mouse;"
->
+  <a-entity
+  light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      target: #model;
+      shadowRadius: 12"
+  xrextras-attach="target: model; offset: 1 15 3;"
+  shadow>
+  </a-entity>
   
-</a-camera>
+  <a-camera 
+    id="camera"
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="
+    fuse: false;
+    rayOrigin: mouse;">
+  </a-camera>
 
-<a-light type="ambient" intensity="0.5"></a-light>
+  <a-light type="ambient" intensity="0.5"></a-light>
 
-<a-entity 
-  id="model" 
-  gltf-model="#dish-1-glb" 
-  class="cantap"
-  xrextras-one-finger-rotate 
-  xrextras-pinch-scale 
-  scale="2 2 2"
-  rotation="0 0 0"
-  shadow="receive: false"></a-entity>
+  <a-entity
+    id="store1-btn"
+    gltf-model="#store1-glb"
+    class="cantap"
+    scale="1 1 1" 
+    rotation="45 0 0"
+    position="0 1 0"
+    shadow="receive: false"
+    visible="true">
+  </a-entity>
+  <a-entity
+    id="store2-btn"
+    gltf-model="#store2-glb" 
+    class="cantap"
+    scale="1 1 1" 
+    rotation="45 0 0"
+    position="0 0 1"
+    shadow="receive: false"
+    visible="true">
+  </a-entity>
+
+  <!--<xrextras-named-image-target name="dev-mode-qr-code">-->
+
+  <a-entity 
+    id="model" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="2 2 2"
+    rotation="0 0 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
+
+  <!--</xrextras-named-image-target>-->
   
-<a-entity class="dish-1"
-  id="dish-name-1"
-  text="value: dish name; anchor: center;"
-  geometry="primitive: plane; width: 0.3; height: auto;"
-  material="color: blue"
-  position="0 2 0"
-  scale="3 3 3"
-  rotation="-45 0 0"></a-entity>
-<a-entity class="dish-1 cantap"
-  id="nutrition-1-btn" 
-  text="value: Click to view nutrition facts!; anchor: center;"
-  geometry="primitive: plane; width: 0.5; height: auto;"
-  scale="1 1 1" 
-  rotation="-45 0 0"
-  position="-0.5 1.5 0"></a-entity>
-<a-entity class="dish-1 cantap"
-  id="ingredients-1-btn" 
-  text="value: Click to view ingredients!; anchor: center;"
-  geometry="primitive: plane; width: 0.5; height: auto;"
-  scale="1 1 1" 
-  rotation="-45 0 0"
-  position="0.5 1.5 0"></a-entity>
   <a-entity class="dish-1"
-  id="dish-quantity-1"
-  text="value: 0; anchor: center;"
-  geometry="primitive: plane; width: 0.1; height: auto;"
-  position="0 1 0"
-  scale="4 4 4"
-  rotation="-45 0 0"></a-entity>
+    id="dish-name-1"
+    text="value: Chicken Rice; anchor: center; wrapCount: 15; color: black"
+    geometry="primitive: plane; width: 0.3; height: auto;"
+    material="color: #ffe599"
+    position="0 1.8 0"
+    scale="3 3 3"
+    rotation="-45 0 0"
+    visible="false"></a-entity>
+  <a-entity class="dish-1"
+    id="nutrition-1-btn" 
+    text="value: Nutrition Facts:\n\nCalories: 218\nTotal Fat: 18g\nSodium: 118g\nCarbohydrate: 21g\nProtein: 39g; anchor: center; wrapCount: 20; color: black"
+    geometry="primitive: plane; width: 0.5; height: auto;"
+    material="color: #ffe599"
+    scale="1 1 1" 
+    rotation="-30 0 0"
+    position="-0.25 1.5 0"
+    visible="false"></a-entity>
+  <a-entity class="dish-1"
+    id="ingredients-1-btn" 
+    text="value: Ingredients:\n\nChicken\nRice\nCucumber\nChilli; anchor: center; wrapCount: 20; color: black"
+    geometry="primitive: plane; width: 0.5; height: auto;"
+    material="color: #ffe599"
+    scale="1 1 1" 
+    rotation="-30 0 0"
+    position="0.25 1.5 0"
+    visible="false"></a-entity>
+   <a-entity class="dish-1"
+    id="dish-quantity-1"
+    text="value: Quantity: 0 ($0.00); anchor: center; wrapCount: 10; color: black"
+    geometry="primitive: plane; width: 0.5; height: auto;"
+    material="color: #ffe599"
+    position="0 1 0"
+    scale="1 1 1"
+    rotation="-45 0 0"
+    visible="false"></a-entity>
+   <!--<a-entity class="dish-1"-->
+   <!-- id="dish-price-1"-->
+   <!-- text="value: $1.50; anchor: center; wrapCount: 10; color: black"-->
+   <!-- geometry="primitive: plane; width: 0.4; height: auto;"-->
+   <!-- material="color: #ffe599"-->
+   <!-- position="0 2 0"-->
+   <!-- scale="1 1 1"-->
+   <!-- rotation="-45 0 0"-->
+   <!-- visible="false"></a-entity>-->
 
-<a-entity 
-  id="plus-btn" 
-  gltf-model="#plus-btn-glb" 
-  class="cantap"
-  scale="30 30 30" 
-  rotation="45 0 180"
-  position="0.5 1 0"
-  shadow="receive: false"></a-entity>
-<a-entity 
-  id="minus-btn" 
-  gltf-model="#minus-btn-glb" 
-  class="cantap"
-  scale="30 30 30" 
-  rotation="45 0 0"
-  position="-0.5 1 0"
-  shadow="receive: false"></a-entity>
-<a-entity 
-  id="left-arrow" 
-  gltf-model="#arrow-btn-glb" 
-  class="cantap"
-  scale="30 30 30" 
-  rotation="45 0 180"
-  position="-0.5 0.5 0"
-  shadow="receive: false"></a-entity>
-<a-entity 
-  id="right-arrow" 
-  gltf-model="#arrow-btn-glb" 
-  class="cantap"
-  scale="30 30 30" 
-  rotation="45 0 0"
-  position="0.5 0.5 0"
-  shadow="receive: false"></a-entity>
+  <a-entity
+    id="plus-btn" 
+    gltf-model="#plus-btn-glb"
+    scale="2 2 2" 
+    rotation="45 0 0"
+    position="0.5 1 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="minus-btn" 
+    gltf-model="#minus-btn-glb"
+    scale="2 2 2" 
+    rotation="45 0 0"
+    position="-0.5 1 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="left-arrow" 
+    gltf-model="#arrow-btn-glb" 
+    scale="2 2 2" 
+    rotation="-45 180 0"
+    position="-0.5 0.5 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="right-arrow" 
+    gltf-model="#arrow-btn-glb"
+    scale="2 2 2" 
+    rotation="45 0 0"
+    position="0.5 0.5 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
 
-<a-plane 
-  height="2000" 
-  width="2000" 
-  rotation="-90 0 0" 
-  material="shader: shadow; opacity: 0.67">
-</a-plane>  
+  <a-entity 
+    id="model1" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="-0.5 0 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model2" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="0.5 0 0"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model3" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="-0.5 0 -1"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model4" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="0.5 0 -1"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model5" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="-0.5 0 -2"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model6" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="0.5 0 -2"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model7" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="-0.5 0 -3"
+    shadow="receive: false"
+    visible="false"></a-entity>
+  <a-entity 
+    id="model8" 
+    gltf-model="#dish-1-glb"
+    xrextras-one-finger-rotate
+    scale="1 1 1"
+    rotation="0 0 0"
+    position="0.5 0 -3"
+    shadow="receive: false"
+    visible="false"></a-entity>
+
+  <a-plane 
+    height="2000" 
+    width="2000" 
+    rotation="-90 0 0" 
+    material="shader: shadow; opacity: 0.67">
+  </a-plane>
+
+  <!--</xrextras-named-image-target>-->
 </a-scene>

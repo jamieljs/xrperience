@@ -4,7 +4,7 @@ body::after {
   height: 0;
   overflow: hidden;
   z-index:-1;
-  content: url(./assets/info_background.png) url(./assets/ui_btn_reset_default.png) url(./assets/ui_btn_reset_pressed.png) url(./assets/finish_ordering_btn.png);
+  content: url(./assets/info_background.png) url(./assets/ui_btn_reset_default.png) url(./assets/ui_btn_reset_pressed.png) url(./assets/finish_ordering_btn.png) url(./assets/send_order_btn.png);
 }
 
 .overlay {
@@ -79,16 +79,28 @@ body::after {
 #finish-btn {
  position: fixed;
  z-index: 15;
- width: 100px;
- height: auto;
- bottom: 24px;
+ width: 225px;
+ height: 120px;
+ bottom: 20px;
  right: 24px;
- background-color: #000000A6;
  color: #ffffff;
- border-radius: 50px;
  text-align: center;
- background-image: url(assets/finish_ordering_btn.png);
+ background-image: url(./assets/finish_ordering_btn.png);
  background-repeat: no-repeat;
+ background-size: 100%;
+}
+#send-order-btn {
+ position: fixed;
+ z-index: 15;
+ width: 225px;
+ height: 120px;
+ bottom: 20px;
+ right: 24px;
+ color: #ffffff;
+ text-align: center;
+ background-image: url(./assets/send_order_btn.png);
+ background-repeat: no-repeat;
+ background-size: 100%;
 }
 .float-top {
   top: 40px;
@@ -137,10 +149,10 @@ p {
   position: absolute;
   bottom: 5vh;
   left: 25vw;
-  background-color: #AD50FF;
-  border: 0.2em solid white;
+  background-color: #FFE599;
+  border: 0.2em solid black;
   text-align: center;
-  color: #FFF;
+  color: black;
   border-radius: 100px;
 }
 h2 {
